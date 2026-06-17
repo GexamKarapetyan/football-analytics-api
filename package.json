@@ -1,0 +1,40 @@
+{
+  "name": "la-liga-2024-stats-analysis",
+  "version": "1.0.0",
+  "description": "Production-ready backend system for La Liga 2024 statistics",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:push": "prisma generate",
+    "db:studio": "prisma studio",
+    "db:generate": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.14.0",
+    "axios": "^1.7.2",
+    "bottleneck": "^2.19.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "pino": "^9.1.0",
+    "pino-http": "^10.0.0",
+    "redis": "^4.6.14",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "pino-pretty": "^11.0.0",
+    "prisma": "^5.14.0",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "type": "module"
+}

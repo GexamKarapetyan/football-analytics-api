@@ -1,0 +1,35 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model TeamSeasonStats {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  teamId             Int      @unique
+  teamName           String
+  leagueId           Int
+  season             Int
+  matchesPlayed      Int      @default(0)
+  totalYellowCards   Int      @default(0)
+  averageYellowCards Float    @default(0)
+  totalCorners       Int      @default(0)
+  updatedAt          DateTime @updatedAt
+
+  @@index([averageYellowCards(sort: Desc)])
+  @@index([totalCorners(sort: Desc)])
+}
+
+model ProcessedFixture {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  fixtureId   Int      @unique
+  leagueId    Int
+  season      Int
+  processedAt DateTime @default(now())
+
+  @@index([leagueId, season])
+}
