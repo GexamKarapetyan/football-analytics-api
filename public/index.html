@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Liga 2024 Statistics</title>
+    <!-- Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <!-- Background decorative elements -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="badge">SEASON 2024</div>
+                <h1>La Liga Analytics</h1>
+                <p>Advanced statistical breakdown of Average Yellow Cards and Total Corners.</p>
+            </div>
+            <button id="exportBtn" class="primary-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Export to Excel
+            </button>
+        </header>
+
+        <div id="loading" class="loading-state">
+            <div class="spinner"></div>
+            <p>Fetching latest match data...</p>
+        </div>
+
+        <main id="dashboard" class="hidden">
+            <div class="grid">
+                <!-- Yellow Cards Section -->
+                <section class="glass-card yellow-theme">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <div class="card-icon"></div>
+                        </div>
+                        <h2>Yellow Cards</h2>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Team</th>
+                                    <th>Played</th>
+                                    <th>Average</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yellowCardsBody">
+                                <!-- Data populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Corners Section -->
+                <section class="glass-card corners-theme">
+                    <div class="card-header">
+                        <div class="icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M3 15a6 6 0 0 1 6 6"/><circle cx="16" cy="8" r="4"/></svg>
+                        </div>
+                        <h2>Total Corners</h2>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Team</th>
+                                    <th>Played</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cornersBody">
+                                <!-- Data populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>

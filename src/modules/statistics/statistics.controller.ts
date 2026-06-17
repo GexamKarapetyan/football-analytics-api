@@ -17,6 +17,11 @@ export class StatisticsController {
         return res.send(buffer);
       }
 
+      // If a browser is accessing this directly, redirect to the beautiful frontend dashboard
+      if (req.accepts(['json', 'html']) === 'html') {
+        return res.redirect(`/?leagueId=${leagueId}&season=${season}`);
+      }
+
       const stats = await statisticsService.getStatistics(leagueId, season);
       res.json(stats);
     } catch (error) {

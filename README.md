@@ -95,6 +95,18 @@ docker-compose down
 docker-compose down -v
 ```
 
+## Visual Dashboard
+
+Instead of viewing raw JSON data, this project includes a stunning, built-in visual frontend! 
+
+![La Liga Dashboard UI](public/ui-preview.png)
+
+Simply open the API URL in your web browser, and you will automatically be redirected to the interactive dashboard where you can easily view the statistics and export them to Excel.
+
+**To view the Dashboard:**
+Open your browser and navigate to:
+`http://localhost:3000/api/v1/statistics/la-liga/2024`
+
 ## API Usage
 
 *(Note: Data synchronization from API-Football happens completely automatically in the background whenever a user requests statistics for a league that isn't cached yet).*
