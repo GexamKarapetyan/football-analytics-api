@@ -6,10 +6,10 @@ import { logger } from '../utils/logger.js';
 export class SyncWorker {
   async runSync(leagueId: number, season: number) {
     logger.info({ leagueId, season }, 'Starting synchronization process');
-    
+
     // 1. Fetch all fixtures
     const allFixtures = await apiFootballClient.getFixtures(leagueId, season);
-    
+
     // 2. Filter for finished matches (FT)
     const finishedFixtures = allFixtures.filter(f => f.fixture.status.short === 'FT');
     logger.info(`Found ${finishedFixtures.length} finished fixtures`);
@@ -32,20 +32,15 @@ export class SyncWorker {
 
     // Process statistics
     let processedCount = 0;
-    
-    // Use an object to aggregate locally before updating DB
-    // Or we can just update DB incrementally. Doing it incrementally is fine.
-    
-    // Using a map to track stats for this batch
-    // Because we need to update the DB, it's safer to just fetch current DB stats,
-    // add to them, and save. To avoid race conditions in DB, we process sequentially or use transactions.
-    // For performance, we can fetch all current stats for the league first.
+
+    // Fetch current DB stats first for performance
+    // Aggregate locally to avoid race conditions
 
     const teamStatsMap = new Map<number, any>();
     const currentStats = await prisma.teamSeasonStats.findMany({
       where: { leagueId, season }
     });
-    
+
     for (const stat of currentStats) {
       teamStatsMap.set(stat.teamId, { ...stat });
     }
@@ -53,7 +48,7 @@ export class SyncWorker {
     const promises = newFixtures.map(async (fixture) => {
       try {
         const stats = await apiFootballClient.getFixtureStatistics(fixture.fixture.id);
-        
+
         if (!stats || stats.length === 0) {
           logger.warn({ fixtureId: fixture.fixture.id }, 'No statistics found for fixture');
           return null;
@@ -72,16 +67,16 @@ export class SyncWorker {
 
     // Wait for all stats to be fetched (bottleneck handles concurrency)
     const results = await Promise.all(promises);
-    
+
     for (const result of results) {
       if (!result) continue;
-      
+
       const { fixtureId, stats } = result;
-      
+
       for (const teamStat of stats) {
         const teamId = teamStat.team.id;
         const teamName = teamStat.team.name;
-        
+
         let yellowCards = 0;
         let corners = 0;
 
@@ -107,15 +102,15 @@ export class SyncWorker {
         current.matchesPlayed += 1;
         current.totalYellowCards += yellowCards;
         current.totalCorners += corners;
-        current.averageYellowCards = current.matchesPlayed > 0 
-          ? Number((current.totalYellowCards / current.matchesPlayed).toFixed(2)) 
+        current.averageYellowCards = current.matchesPlayed > 0
+          ? Number((current.totalYellowCards / current.matchesPlayed).toFixed(2))
           : 0;
 
         teamStatsMap.set(teamId, current);
       }
-      
+
       processedCount++;
-      // Save processed fixture
+
       await prisma.processedFixture.create({
         data: {
           fixtureId,
@@ -125,7 +120,6 @@ export class SyncWorker {
       });
     }
 
-    // Upsert all team stats
     for (const [_, stats] of teamStatsMap.entries()) {
       await prisma.teamSeasonStats.upsert({
         where: { teamId: stats.teamId },
@@ -148,16 +142,15 @@ export class SyncWorker {
       });
     }
 
-    // Clear the Redis cache since data has changed
     const cacheKey = `stats:${leagueId}:${season}`;
     await redisClient.delete(cacheKey);
 
     logger.info(`Sync completed. Processed ${processedCount} new fixtures.`);
-    
-    return { 
-      status: 'success', 
-      message: 'Sync completed', 
-      newProcessed: processedCount 
+
+    return {
+      status: 'success',
+      message: 'Sync completed',
+      newProcessed: processedCount
     };
   }
 }
