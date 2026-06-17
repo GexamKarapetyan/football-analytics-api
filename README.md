@@ -97,15 +97,13 @@ docker-compose down -v
 
 ## API Usage
 
-### 1. Sync Data
-Trigger a synchronization process to fetch new match data from API-Football.
-**Endpoint**: `POST /api/v1/statistics/la-liga/2024/sync`
+*(Note: Data synchronization from API-Football happens completely automatically in the background whenever a user requests statistics for a league that isn't cached yet).*
 
-### 2. Get Statistics
+### 1. Get Statistics
 Retrieve the aggregated statistics.
 **Endpoint**: `GET /api/v1/statistics/la-liga/2024`
 
-### 3. Export to Excel
+### 2. Export to Excel
 You can download the statistics as an Excel file using either of these endpoints:
 **Endpoint Option 1**: `GET /api/v1/statistics/la-liga/2024/export`
 **Endpoint Option 2**: `GET /api/v1/statistics/la-liga/2024?format=excel`
