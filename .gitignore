@@ -116,3 +116,5 @@ docker-compose.override.yml
 seed.ts
 errors.txt
 statistics.xlsx
+test-api.ts
+test-api*
