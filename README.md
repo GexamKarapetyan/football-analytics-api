@@ -22,9 +22,6 @@ This project follows **Clean Architecture** principles:
 - Once fetched, data is aggregated and stored securely in **MongoDB**.
 - When clients request data via `GET /api/v1/statistics/...`, it is served directly from a **Redis** cache (with a 24h TTL) or from the database, resulting in **0 external API calls**.
 
-**Future Updates**:
-- Calling the `/sync` endpoint will only fetch new fixtures that haven't been processed yet. The `ProcessedFixture` table ensures we never query statistics for the same fixture twice.
-
 ## Setup Instructions
 
 ### 1. Environment Variables
