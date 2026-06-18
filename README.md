@@ -105,7 +105,7 @@ Simply open the API URL in your web browser, and you will automatically be redir
 
 **To view the Dashboard:**
 Open your browser and navigate to:
-`http://localhost:3000/api/v1/statistics/premier-league/2024`
+`http://localhost:3000/api/v1/statistics/la-liga/2024`
 
 ## API Usage
 
@@ -113,12 +113,12 @@ Open your browser and navigate to:
 
 ### 1. Get Statistics
 Retrieve the aggregated statistics.
-**Endpoint**: `GET /api/v1/statistics/premier-league/2024`
+**Endpoint**: `GET /api/v1/statistics/la-liga/2024`
 
 ### 2. Export to Excel
 You can download the statistics as an Excel file using either of these endpoints:
-**Endpoint Option 1**: `GET /api/v1/statistics/premier-league/2024/export`
-**Endpoint Option 2**: `GET /api/v1/statistics/premier-league/2024?format=excel`
+**Endpoint Option 1**: `GET /api/v1/statistics/la-liga/2024/export`
+**Endpoint Option 2**: `GET /api/v1/statistics/la-liga/2024?format=excel`
 
 ## Testing
 

@@ -3,10 +3,9 @@ import { statisticsController } from '../modules/statistics/statistics.controlle
 
 export const router = Router();
 
-// Specific league and season routes
-router.get('/statistics/la-liga/2024', statisticsController.getStatistics);
-router.get('/statistics/la-liga/2024/export', statisticsController.exportExcel);
 
 // Dynamic league and season routes
+// Example usage: /statistics/la-liga/2024 or /statistics/140/2024
+// (You can pass either the string name or the numeric API-Football league ID)
 router.get('/statistics/:leagueId/:season', statisticsController.getStatistics);
 router.get('/statistics/:leagueId/:season/export', statisticsController.exportExcel);
