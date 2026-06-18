@@ -1,4 +1,4 @@
-# La Liga 2024 Statistics Backend
+# Football Statistics Backend (Premier League, La Liga, Serie A, Bundesliga, Ligue 1)
 
 A production-ready Node.js + TypeScript backend system that integrates with the API-Football v3 API to aggregate and serve football statistics (Average Yellow Cards and Total Corners). You can choose to analyze data from the top 5 leagues for the 2022, 2023, and 2024 seasons!
 
@@ -14,7 +14,7 @@ This project follows **Clean Architecture** principles:
 ## Most Important Optimization
 
 **First Run**:
-- The application fetches all fixtures for La Liga 2024.
+- The application fetches all fixtures for the requested league and season.
 - It concurrently fetches statistics for all finished fixtures (using bottleneck to limit concurrency to 5 requests per second to avoid rate limiting).
 - In a full season, this equates to ~380 matches, which means ~381 API calls.
 
@@ -99,13 +99,13 @@ docker-compose down -v
 
 Instead of viewing raw JSON data, this project includes a stunning, built-in visual frontend! 
 
-![La Liga Dashboard UI](public/ui-preview.png)
+![Football Dashboard UI](public/ui-preview.png)
 
 Simply open the API URL in your web browser, and you will automatically be redirected to the interactive dashboard where you can easily view the statistics and export them to Excel. You can choose to analyze data from the top 5 leagues for the 2022, 2023, and 2024 seasons!
 
 **To view the Dashboard:**
 Open your browser and navigate to:
-`http://localhost:3000/api/v1/statistics/la-liga/2024`
+`http://localhost:3000/api/v1/statistics/premier-league/2024`
 
 ## API Usage
 
@@ -113,12 +113,12 @@ Open your browser and navigate to:
 
 ### 1. Get Statistics
 Retrieve the aggregated statistics.
-**Endpoint**: `GET /api/v1/statistics/la-liga/2024`
+**Endpoint**: `GET /api/v1/statistics/premier-league/2024`
 
 ### 2. Export to Excel
 You can download the statistics as an Excel file using either of these endpoints:
-**Endpoint Option 1**: `GET /api/v1/statistics/la-liga/2024/export`
-**Endpoint Option 2**: `GET /api/v1/statistics/la-liga/2024?format=excel`
+**Endpoint Option 1**: `GET /api/v1/statistics/premier-league/2024/export`
+**Endpoint Option 2**: `GET /api/v1/statistics/premier-league/2024?format=excel`
 
 ## Testing
 
