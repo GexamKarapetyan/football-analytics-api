@@ -122,7 +122,12 @@ export class SyncWorker {
 
     for (const [_, stats] of teamStatsMap.entries()) {
       await prisma.teamSeasonStats.upsert({
-        where: { teamId: stats.teamId },
+        where: { 
+          teamId_season: {
+            teamId: stats.teamId,
+            season: stats.season
+          }
+        },
         update: {
           matchesPlayed: stats.matchesPlayed,
           totalYellowCards: stats.totalYellowCards,

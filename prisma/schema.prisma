@@ -10,7 +10,7 @@ datasource db {
 
 model TeamSeasonStats {
   id                 String   @id @default(auto()) @map("_id") @db.ObjectId
-  teamId             Int      @unique
+  teamId             Int
   teamName           String
   leagueId           Int
   season             Int
@@ -20,6 +20,7 @@ model TeamSeasonStats {
   totalCorners       Int      @default(0)
   updatedAt          DateTime @updatedAt
 
+  @@unique([teamId, season])
   @@index([averageYellowCards(sort: Desc)])
   @@index([totalCorners(sort: Desc)])
 }

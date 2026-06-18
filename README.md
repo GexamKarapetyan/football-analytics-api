@@ -1,6 +1,6 @@
 # La Liga 2024 Statistics Backend
 
-A production-ready Node.js + TypeScript backend system that integrates with the API-Football v3 API to aggregate and serve La Liga 2024 statistics (Average Yellow Cards and Total Corners).
+A production-ready Node.js + TypeScript backend system that integrates with the API-Football v3 API to aggregate and serve football statistics (Average Yellow Cards and Total Corners). You can choose to analyze data from the top 5 leagues for the 2022, 2023, and 2024 seasons!
 
 ## Architecture
 
@@ -101,7 +101,7 @@ Instead of viewing raw JSON data, this project includes a stunning, built-in vis
 
 ![La Liga Dashboard UI](public/ui-preview.png)
 
-Simply open the API URL in your web browser, and you will automatically be redirected to the interactive dashboard where you can easily view the statistics and export them to Excel.
+Simply open the API URL in your web browser, and you will automatically be redirected to the interactive dashboard where you can easily view the statistics and export them to Excel. You can choose to analyze data from the top 5 leagues for the 2022, 2023, and 2024 seasons!
 
 **To view the Dashboard:**
 Open your browser and navigate to:
